@@ -17,6 +17,9 @@
     <verticalLine type="line" :data="dataPercent" :height="100" :write="writePercent" :columnWidth="columnWidth"></verticalLine>
   </div>
 
+  <div class="box-chartz">
+   <dotsProgress type="line" :raio="5" :data="dots" :width="50" :height="100" :write="write"></dotsProgress>
+  </div>
 
   <!-- <div class="box-chartz">
     <chartz></chartz>
@@ -34,21 +37,25 @@ import chartz from '@/components/chartz'
 import circleProgress from '@/components/circleProgress'
 import lineProgress from '@/components/lineProgress'
 import verticalLine from '@/components/verticalLine'
+import dotsProgress from '@/components/dotsProgress'
+
 export default {
   components: {
     chartz,
     circleProgress,
     lineProgress,
-    verticalLine
+    verticalLine,
+    dotsProgress
   },
   data () {
     return {
       data: [50, 20, 60, 100, 20, 40],
       write: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
 
-      dataPercent: [50, 20, 60, 100, 20, 40],
-      writePercent: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-      columnWidth: 100
+      dataPercent: [50, 20, 60, 100, 20, 40, 50, 20],
+      writePercent: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago'],
+      columnWidth: 100,
+      dots: ['50,20', '30,10', '10,10', '55,5']
     }
   }
 }

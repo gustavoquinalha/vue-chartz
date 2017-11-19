@@ -6,7 +6,7 @@
 
 
       <text v-for="(write, index) in (height / 10) + 1" :y="index * 10" :x="-30" class="text text-write">
-        {{write * 10 - 10}}
+        {{(write * 10 - 10) * -1 + 100}}
       </text>
 
       <line x1="86%" x2="0" y1="100" y2="100" style="stroke: #ddd; stroke-width: .5px;"/>
@@ -19,7 +19,7 @@
       <!-- escrita em baixo -->
 
       <g v-for="(x, index) in data">
-        <rect  :width="columnWidth - 50 + 'px'" :height="x" style="fill:blue" :x="index * columnWidth"  y="0"/>
+        <rect  :width="columnWidth - 50 + 'px'" :height="x" style="fill:blue" :x="index * columnWidth"  :y="height - x"/>
       </g>
 
 
