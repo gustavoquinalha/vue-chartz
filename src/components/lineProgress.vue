@@ -4,7 +4,7 @@
   <div v-if="type == 'line'" class="mark" style="width: 100%; max-width: 100%">
     <svg xmlns="http://www.w3.org/2000/svg" class="mark" xmlns:xlink="http://www.w3.org/1999/xlink" :viewBox="'-60 -25 ' + (dataSize - 1) * (height + 20) + ' ' + (height + 60)" :style="{ strokeWidth: strokeWidth }">
 
-      <text v-for="(write, index) in height / 10" :y="index * 10" :x="-30" class="text-write">
+      <text v-for="(write, index) in (height / 10) + 1" :y="index * 10" :x="-30" class="text-write">
         {{write * 10 - 10}}
       </text>
 
