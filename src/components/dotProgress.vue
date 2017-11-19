@@ -1,7 +1,7 @@
 <template>
 <div>
 
-  <div class="mark" style="width: 100%; max-width: 100%">
+  <div v-if="type == 'line'" class="mark" style="width: 100%; max-width: 100%">
     <svg xmlns="http://www.w3.org/2000/svg" class="mark" xmlns:xlink="http://www.w3.org/1999/xlink" :viewBox="'-60 -25 ' + (dataSize - 1) * (height + 20) + ' ' + (height + 60)" :style="{ strokeWidth: strokeWidth }">
 
       <text v-for="(write, index) in (height / 10) + 1" :y="index * 10" :x="-30" class="text-write">
@@ -12,19 +12,24 @@
         <!-- horizontal -->
         <line v-for="(write, index) in height / 10" x1="86%" :x2="0" :y1="index * 10" :y2="index * 10" fill="red" style="stroke: #ddd; stroke-width: .5px;"/>
         <!-- horizontal -->
+        <!-- marcao horicontal -->
+        <line v-for="(line, index) in pointsData" x1="86%" :x2="0" :y1="line[1]" :y2="line[1]" style="stroke: #ccc; stroke-width: 1px;"/>
+        <!-- marcao horicontal -->
 
         <line v-for="(write, index) in height / 10" :x1="index * 100" :x2="index * 100" :y1="0" :y2="100" fill="red" style="stroke: #ddd; stroke-width: .5px;"/>
         <line x1="86%" x2="0" y1="100" y2="100" style="stroke: #ddd; stroke-width: .5px;"/>
 
         <!-- escrita em baixo -->
-        <text v-for="(valueWrite, index) in (width/10)" :x="(width/pointsData.length) * index" :y="120" class="text-write">
-          {{valueWrite * 10}}
+        <text v-for="(valueWrite, index) in write" :x="index * 100" :y="120" class="text-write">
+          {{valueWrite}}
         </text>
         <!-- escrita em baixo -->
 
-        <g class="point-show" v-for="(x, index) in pointsData">
-          <circle class="ball-over pcolor1" :cx="x[0]" :cy="height - x[1]" :r="raio" fill="#333"/>
-          <text class="show-text text-value" :x="x[0]" :y="height - x[1]">{{x[1]}}</text>
+        <!-- grafico -->
+
+        <g class="point-show" v-for="x in pointsData">
+          <circle class="ball-over pcolor1" :cx="x[0]" :cy="x[1]" :r="raio" fill="#333"/>
+          <text class="show-text text-value" :x="x[0]" :y="x[1]">{{100 - x[1]}}</text>
         </g>
 
         <!-- grafico -->
@@ -60,9 +65,6 @@ export default {
     height: {
       type: Number
     },
-    width: {
-      type: Number
-    },
     size: {
       type: Number
     },
@@ -86,19 +88,19 @@ export default {
     }
   },
   created () {
-    this.data.map((data, index) => {
+    this.dataSize = this.data.length
+    console.log('size: ' + this.dataSize)
+
+    let quociente = (this.dataSize * 100) / (this.dataSize)
+
+    for (let i = 0; i < this.dataSize; i++) {
+      this.fullData.push(`${quociente * i},${100 - this.data[i]}`)
+    }
+
+    this.fullData.map((data, index) => {
       this.pointsData.push(data.split(','))
       console.log(this.pointsData[index])
     })
-    let biggest = 0
-    for (let x of this.pointsData) {
-      if (parseInt(x[0]) >= biggest) {
-        biggest = parseInt(parseInt(x[0]))
-      }
-    }
-    console.log(biggest)
-    this.dataSize = biggest / 10
-    console.log('size: ' + this.dataSize)
   }
 
 }

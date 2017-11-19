@@ -1,7 +1,14 @@
 <template>
 <div class="container column justify-content-center align-items-center height">
 
-  <div class="box-chartz container">
+
+    <div class="box-chartz">
+      <dotsProgress :raio="5" :data="dots" :width="50" :height="100" :write="write"></dotsProgress>
+    </div>
+
+
+
+    <div class="box-chartz container">
     <circleProgress percent="47" :strokeWidth="4"/>
 
     <circleProgress percent="69" :strokeWidth="2"/>
@@ -13,12 +20,12 @@
     <lineProgress type="line" :stroke-width="2" :raio="4" :data="data" :height="100" :write="write"></lineProgress>
   </div>
 
-   <div class="box-chartz">
-    <verticalLine type="line" :data="dataPercent" :height="100" :write="writePercent" :columnWidth="columnWidth"></verticalLine>
+  <div class="box-chartz">
+   <dotProgress type="line" :stroke-width="10" :raio="5" :data="data" :height="100" :write="write"></dotProgress>
   </div>
 
-  <div class="box-chartz">
-   <dotsProgress type="line" :raio="5" :data="dots" :width="50" :height="100" :write="write"></dotsProgress>
+   <div class="box-chartz">
+    <verticalLine type="line" :data="dataPercent" :height="100" :write="writePercent" :columnWidth="columnWidth"></verticalLine>
   </div>
 
   <!-- <div class="box-chartz">
@@ -38,6 +45,7 @@ import circleProgress from '@/components/circleProgress'
 import lineProgress from '@/components/lineProgress'
 import verticalLine from '@/components/verticalLine'
 import dotsProgress from '@/components/dotsProgress'
+import dotProgress from '@/components/dotProgress'
 
 export default {
   components: {
@@ -45,17 +53,18 @@ export default {
     circleProgress,
     lineProgress,
     verticalLine,
-    dotsProgress
+    dotsProgress,
+    dotProgress
   },
   data () {
     return {
       data: [50, 20, 60, 100, 20, 40],
       write: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
 
-      dataPercent: [50, 20, 60, 100, 20, 40, 50, 20],
-      writePercent: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago'],
+      dataPercent: [50, 20, 60, 100, 20, 40],
+      writePercent: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
       columnWidth: 100,
-      dots: ['50,20', '30,10', '10,10', '55,5']
+      dots: ['50,60', '30,10', '10,10', '55,5']
     }
   }
 }
