@@ -20,17 +20,14 @@
         <line x1="86%" x2="0" y1="100" y2="100" style="stroke: #ddd; stroke-width: .5px;"/>
 
         <!-- escrita em baixo -->
-        <text v-for="(valueWrite, index) in write" :x="index * 100" :y="120" class="text-write">
-          {{valueWrite}}
+        <text v-for="(valueWrite, index) in (width/10)" :x="(width/pointsData.length) * index" :y="120" class="text-write">
+          {{valueWrite * 10}}
         </text>
         <!-- escrita em baixo -->
 
-        <!-- grafico -->
-        <polyline class="line color1" :points="fullData"/>
-
         <g class="point-show" v-for="x in pointsData">
-          <circle class="ball-over pcolor1" :cx="x[0]" :cy="x[1]" :r="raio" fill="#333"/>
-          <text class="show-text text-value" :x="x[0]" :y="x[1]">{{100 - x[1]}}</text>
+          <circle class="ball-over pcolor1" :cx="x[0]" :cy="height - x[1]" :r="raio" fill="#333"/>
+          <text class="show-text text-value" :x="x[0]" :y="height - x[1]">{{x[1]}}</text>
         </g>
 
         <!-- grafico -->
@@ -66,6 +63,9 @@ export default {
     height: {
       type: Number
     },
+    width: {
+      type: Number
+    },
     size: {
       type: Number
     },
@@ -89,19 +89,19 @@ export default {
     }
   },
   created () {
-    this.dataSize = this.data.length
-    console.log('size: ' + this.dataSize)
-
-    let quociente = (this.dataSize * 100) / (this.dataSize)
-
-    for (let i = 0; i < this.dataSize; i++) {
-      this.fullData.push(`${quociente * i},${100 - this.data[i]}`)
-    }
-
-    this.fullData.map((data, index) => {
+    this.data.map((data, index) => {
       this.pointsData.push(data.split(','))
       console.log(this.pointsData[index])
     })
+    let biggest = 0
+    for (let x of this.pointsData) {
+      if (parseInt(x[0]) >= biggest) {
+        biggest = parseInt(parseInt(x[0]))
+      }
+    }
+    console.log(biggest)
+    this.dataSize = biggest / 10
+    console.log('size: ' + this.dataSize)
   }
 
 }
