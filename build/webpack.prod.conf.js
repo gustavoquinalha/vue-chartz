@@ -10,7 +10,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 
-
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
@@ -30,13 +29,13 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new WebpackPwaManifest({
-      filename: "manifest.json",
+      filename: 'manifest.json',
       name: 'Vue default',
-      start_url: "./?utm_source=web_app_manifest",
+      start_url: './?utm_source=web_app_manifest',
       short_name: 'Vue default',
       description: 'Vue default',
-      orientation: "portrait",
-      display: "standalone",
+      orientation: 'portrait',
+      display: 'standalone',
       background_color: '#dddddd',
       inject: true,
       fingerprints: false,
