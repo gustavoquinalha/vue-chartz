@@ -1,6 +1,16 @@
 # Vue Chartz
 Simple and responsive SVG Chart Component for Vue.
 
+## Inspired by
+- https://frappe.github.io/charts/
+- https://gionkunz.github.io/chartist-js/
+- https://github.com/lakb248/vue-chartist
+- http://vue-charts.hchspersonal.tk/line
+- https://cinwell.com/vue-trend/
+- https://deviavir.github.io/vue-bar/
+- http://recharts.org/#/en-US/guide/getting-started
+- http://jerairrest.github.io/react-chartjs-2/
+
 ## Clone the project
 
 ``` bash
